@@ -1,10 +1,32 @@
-import { GET_USERS } from '../constants';
+import { REQUEST_USERS, RECEIVE_USERS, FAILED_REQEST } from '../constants';
 
-const users = (state = [], action) => {
-  const { type, payload } = action;
+const initialState = {
+  isLoading: false,
+  items: [],
+  error: '',
+};
+
+const users = (state = initialState, action) => {
+  const { type, payload, error } = action;
   switch (type) {
-    case GET_USERS:
-      return payload;
+    case REQUEST_USERS:
+      return {
+        isLoading: true,
+        items: state.items,
+        error: '',
+      };
+    case RECEIVE_USERS:
+      return {
+        isLoading: false,
+        items: payload,
+        error: '',
+      };
+    case FAILED_REQEST:
+      return {
+        isLoading: false,
+        items: [],
+        error,
+      };
     default:
       return state;
   }

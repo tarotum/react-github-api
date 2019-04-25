@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import Users from '../components/Users';
@@ -8,49 +8,71 @@ class UsersContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      location: 'Odessa',
     };
+    this.locationHandler = this.locationHandler.bind(this);
+    this.submitHandler = this.submitHandler.bind(this);
   }
 
   componentDidMount() {
-    const { fetchUsers } = this.props;
-    fetchUsers();
+    const { receiveUsers, requestUsers } = this.props;
+    const { location } = this.state;
+    requestUsers();
+    receiveUsers(location.toLocaleLowerCase());
+  }
+
+  locationHandler({ currentTarget }) {
+    this.setState({
+      location: currentTarget.value,
+    });
+  }
+
+  submitHandler(event) {
+    event.preventDefault();
+    const { receiveUsers, requestUsers, failedRequest } = this.props;
+    const { location } = this.state;
+
+    if (location === '') {
+      failedRequest('Query string must contain location');
+    } else {
+      requestUsers();
+      receiveUsers(location.toLocaleLowerCase());
+      this.setState({
+        location: '',
+      });
+    }
   }
 
   render() {
-    const { users } = this.props;
-    const { query } = this.state;
-    const handleQuery = ({ target: { value } }) => {
-      this.setState({
-        query: value,
-      });
-    };
-    const handleSubmit = e => {
-      e.preventDefault();
-      console.log(`GET_USERS BY ${query}`);
-      this.setState({
-        query: '',
-      });
-    };
-    return (
-      <div>
-        <form onSubmit={handleSubmit}>
-          <input type="search" value={query} onChange={handleQuery} placeholder="town" />
-          <button type="button">Search</button>
-        </form>
+    const { users, isLoading, error } = this.props;
+    const { location } = this.state;
 
-        <Users users={users} />
-      </div>
+    return (
+      <Fragment>
+        <form onSubmit={this.submitHandler}>
+          <input type="search" value={location} onChange={this.locationHandler} />
+          <button type="submit">Get users</button>
+        </form>
+        <Users users={users} isLoading={isLoading} error={error} />
+      </Fragment>
     );
   }
 }
 
 UsersContainer.propTypes = {
-  fetchUsers: PropTypes.func.isRequired,
-  users: PropTypes.arrayOf(PropTypes.object).isRequired,
+  requestUsers: PropTypes.func.isRequired,
+  receiveUsers: PropTypes.func.isRequired,
+  failedRequest: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
+  users: PropTypes.arrayOf(PropTypes.any).isRequired,
+  error: PropTypes.string.isRequired,
 };
 
 export default connect(
-  state => ({ users: state.users }),
+  state => ({
+    users: state.users.items,
+    isLoading: state.users.isLoading,
+    error: state.users.error,
+  }),
   actionUsers,
 )(UsersContainer);
