@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import Users from './containers/Users';
+import Users from './containers/UsersContainer';
 
 // The Button from the last section without the interpolations
 const Button = styled.button`
@@ -13,17 +13,9 @@ const Button = styled.button`
   border-radius: 3px;
 `;
 
-// A new component based on Button, but with some override styles
-const TomatoButton = styled(Button)`
-  color: tomato;
-  border-color: tomato;
-`;
-
-export default () => {
-  return (
-    <div>
-      <Users />
-      <Button>Render</Button>
-    </div>
-  );
-};
+export default () => (
+  <div>
+    <Users />
+    <Button>Render</Button>
+  </div>
+);
