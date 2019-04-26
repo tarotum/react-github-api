@@ -1,6 +1,13 @@
 import React from 'react';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
+
 import User from './User';
+
+const UsersList = styled.div`
+  overflow-y: scroll;
+  height: 65vh;
+`;
 
 const Users = ({ users, isLoading, error }) => {
   if (error !== '') {
@@ -13,11 +20,11 @@ const Users = ({ users, isLoading, error }) => {
     return <p>Nothing found</p>;
   }
   return (
-    <div className="user-list">
+    <UsersList>
       {users.map(item => (
         <User key={item.id} user={item} />
       ))}
-    </div>
+    </UsersList>
   );
 };
 
