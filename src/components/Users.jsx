@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import User from './User';
 
 const UsersList = styled.div`
-  overflow-y: scroll;
-  height: 65vh;
+  overflow-y: auto;
+  height: 70vh;
 `;
 
 const Users = ({ users, isLoading, error }) => {
