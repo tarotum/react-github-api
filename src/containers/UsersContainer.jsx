@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import UserForm from '../components/UserForm';
 import Users from '../components/Users';
 import actionUsers from '../actions/actionUsers';
 
@@ -49,10 +50,11 @@ class UsersContainer extends Component {
 
     return (
       <Fragment>
-        <form onSubmit={this.submitHandler}>
-          <input type="search" value={location} onChange={this.locationHandler} />
-          <button type="submit">Get users</button>
-        </form>
+        <UserForm
+          fromValue={location}
+          inputHandler={this.locationHandler}
+          submitHandler={this.submitHandler}
+        />
         <Users users={users} isLoading={isLoading} error={error} />
       </Fragment>
     );
