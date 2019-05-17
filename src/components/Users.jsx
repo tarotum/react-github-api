@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
-import User from './User';
+import User from "./User";
 
 const UsersList = styled.div`
   overflow-y: auto;
@@ -10,7 +10,7 @@ const UsersList = styled.div`
 `;
 
 const Users = ({ users, isLoading, error }) => {
-  if (error !== '') {
+  if (error !== "") {
     return <p>{error}</p>;
   }
   if (isLoading && !users.length) {
@@ -31,7 +31,7 @@ const Users = ({ users, isLoading, error }) => {
 Users.propTypes = {
   users: PropTypes.arrayOf(PropTypes.any).isRequired,
   isLoading: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired
 };
 
 export default Users;

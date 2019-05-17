@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React, { Fragment } from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const From = styled.form`
   display: flex;
@@ -32,7 +32,12 @@ const Icon = styled.svg`
 const UserForm = ({ fromValue, inputHandler, submitHandler }) => (
   <Fragment>
     <From onSubmit={submitHandler}>
-      <Input type="search" value={fromValue} onChange={inputHandler} placeholder="location..." />
+      <Input
+        type="search"
+        value={fromValue}
+        onChange={inputHandler}
+        placeholder="location..."
+      />
       <Button type="submit">
         <Icon xmlns="http://www.w3.org/2000/svg">
           <g fill="#000">
@@ -48,7 +53,7 @@ const UserForm = ({ fromValue, inputHandler, submitHandler }) => (
 UserForm.propTypes = {
   submitHandler: PropTypes.func.isRequired,
   inputHandler: PropTypes.func.isRequired,
-  fromValue: PropTypes.string.isRequired,
+  fromValue: PropTypes.string.isRequired
 };
 
 export default UserForm;

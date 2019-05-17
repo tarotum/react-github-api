@@ -1,9 +1,9 @@
-import { REQUEST_USERS, RECEIVE_USERS, FAILED_REQEST } from '../constants';
+import { REQUEST_USERS, RECEIVE_USERS, FAILED_REQEST } from "../constants";
 
 const initialState = {
   isLoading: false,
   items: [],
-  error: '',
+  error: ""
 };
 
 const users = (state = initialState, action) => {
@@ -13,19 +13,19 @@ const users = (state = initialState, action) => {
       return {
         isLoading: true,
         items: state.items,
-        error: '',
+        error: ""
       };
     case RECEIVE_USERS:
       return {
         isLoading: false,
         items: payload,
-        error: '',
+        error: ""
       };
     case FAILED_REQEST:
       return {
         isLoading: false,
         items: [],
-        error,
+        error
       };
     default:
       return state;

@@ -1,15 +1,15 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import UserForm from '../components/UserForm';
-import Users from '../components/Users';
-import actionUsers from '../actions/actionUsers';
+import React, { Component, Fragment } from "react";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import UserForm from "../components/UserForm";
+import Users from "../components/Users";
+import actionUsers from "../actions/actionUsers";
 
 class UsersContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      location: 'Odessa',
+      location: "Odessa"
     };
     this.locationHandler = this.locationHandler.bind(this);
     this.submitHandler = this.submitHandler.bind(this);
@@ -24,7 +24,7 @@ class UsersContainer extends Component {
 
   locationHandler({ currentTarget }) {
     this.setState({
-      location: currentTarget.value,
+      location: currentTarget.value
     });
   }
 
@@ -33,13 +33,13 @@ class UsersContainer extends Component {
     const { receiveUsers, requestUsers, failedRequest } = this.props;
     const { location } = this.state;
 
-    if (location === '') {
-      failedRequest('Query string must contain location');
+    if (location === "") {
+      failedRequest("Query string must contain location");
     } else {
       requestUsers();
       receiveUsers(location.toLocaleLowerCase());
       this.setState({
-        location: '',
+        location: ""
       });
     }
   }
@@ -67,14 +67,14 @@ UsersContainer.propTypes = {
   failedRequest: PropTypes.func.isRequired,
   isLoading: PropTypes.bool.isRequired,
   users: PropTypes.arrayOf(PropTypes.any).isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string.isRequired
 };
 
 export default connect(
   state => ({
     users: state.users.items,
     isLoading: state.users.isLoading,
-    error: state.users.error,
+    error: state.users.error
   }),
-  actionUsers,
+  actionUsers
 )(UsersContainer);

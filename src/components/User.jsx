@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
-import React from 'react';
-import styled from 'styled-components';
-import PropTypes from 'prop-types';
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
 
 const UserWrapper = styled.a`
   display: flex;
@@ -38,7 +38,7 @@ const User = ({ user }) => (
 );
 
 User.propTypes = {
-  user: PropTypes.objectOf(PropTypes.any).isRequired,
+  user: PropTypes.objectOf(PropTypes.any).isRequired
 };
 
 export default User;
