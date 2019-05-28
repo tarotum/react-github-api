@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Query } from "react-apollo";
+import { graphql, compose } from "react-apollo";
+import PropTypes from "prop-types";
 
 import GET_USERS_BY_LOC from "../queries/Users.graphql";
 import GET_LOCATION from "../queries/GetLocation.graphql";
@@ -11,33 +12,54 @@ const UsersList = styled.div`
   height: 70vh;
 `;
 
-const UserList = () => {
+const UserList = ({
+  getUsersByLocation: { loading, error, search, refetch }
+}) => {
+  if (loading) {
+    return (
+      <UsersList>
+        <div>Loading...</div>
+      </UsersList>
+    );
+  }
+  if (error) {
+    return (
+      <UsersList>
+        <button type="button" onClick={() => refetch()}>
+          Reload
+        </button>
+      </UsersList>
+    );
+  }
+  if (search.nodes.length === 0) {
+    return (
+      <UsersList>
+        <div>Nothing found</div>
+      </UsersList>
+    );
+  }
+
   return (
     <UsersList>
-      <Query query={GET_LOCATION}>
-        {localResponce => {
-          return (
-            <Query
-              query={GET_USERS_BY_LOC}
-              variables={{
-                location: `location:${localResponce.data.location}`
-              }}
-            >
-              {({ loading, error, data }) => {
-                if (loading) return <div>Loading...</div>;
-                if (error) return global.console.log(error);
-                const {
-                  search: { nodes }
-                } = data;
-
-                return nodes.map(user => <User key={user.id} user={user} />);
-              }}
-            </Query>
-          );
-        }}
-      </Query>
+      {search.nodes.map(user => (
+        <User key={user.id} user={user} />
+      ))}
     </UsersList>
   );
 };
 
-export default UserList;
+UserList.propTypes = {
+  getUsersByLocation: PropTypes.func.isRequired
+};
+
+export default compose(
+  graphql(GET_LOCATION, { name: "getLocation" }),
+  graphql(GET_USERS_BY_LOC, {
+    name: "getUsersByLocation",
+    options: ({ getLocation: { location } }) => ({
+      variables: {
+        location: `location:${location}`
+      }
+    })
+  })
+)(UserList);

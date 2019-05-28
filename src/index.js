@@ -14,7 +14,7 @@ const defaultState = {
 const client = new ApolloCliet({
   uri: "https://api.github.com/graphql",
   headers: {
-    authorization: "Bearer c4c5692c4a84a45ccb83541266906fe0f3e481c4"
+    authorization: "Bearer personal_key_here"
   },
   clientState: {
     defaults: defaultState,
