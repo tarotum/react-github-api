@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
-import UsersContainer from "./containers/UsersContainer";
+import UserFrom from "./components/UserForm";
+import UserList from "./components/UserList";
 
 const AppWrapper = styled.div`
   max-width: 445px;
@@ -14,7 +15,8 @@ const AppWrapper = styled.div`
 
 const App = () => (
   <AppWrapper>
-    <UsersContainer />
+    <UserFrom />
+    <UserList />
   </AppWrapper>
 );
 

@@ -31,14 +31,18 @@ const H4 = styled.h4`
 `;
 
 const User = ({ user }) => (
-  <UserWrapper href={user.html_url} title={user.login}>
-    <Image src={user.avatar_url} alt={user.login} />
+  <UserWrapper href={user.url} title={user.login}>
+    <Image src={user.avatarUrl} alt={user.login} />
     <H4>{user.login}</H4>
   </UserWrapper>
 );
 
 User.propTypes = {
-  user: PropTypes.objectOf(PropTypes.any).isRequired
+  user: PropTypes.shape({
+    login: PropTypes.string,
+    avatarUrl: PropTypes.string,
+    url: PropTypes.string
+  }).isRequired
 };
 
 export default User;

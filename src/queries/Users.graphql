@@ -1,0 +1,12 @@
+query getUsersByLocation($location: String!) {
+  search(first: 10, type: USER, query: $location) {
+    nodes {
+      ... on User {
+        id
+        login
+        avatarUrl
+        url
+      }
+    }
+  }
+}
