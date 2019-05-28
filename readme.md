@@ -1,5 +1,7 @@
 # Simple work with Apollo GraphQL and github api
 
+For using github api v4 you need specify personal key [read more](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
+
 #### Commands:
 
 1. `$ npm run start` or `yarn start` - run dev environment
@@ -7,7 +9,7 @@
 
 ### Description:
 
-This is a training project, for learning react and redux in practice with real api
+This is a training project, for learning react and Apollo Graphql in practice with real api.
 
 ### Development plans:
 
