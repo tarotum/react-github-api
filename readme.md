@@ -1,4 +1,4 @@
-# Simple work with github api
+# Simple work with Apollo GraphQL and github api
 
 #### Commands:
 
@@ -12,4 +12,3 @@ This is a training project, for learning react and redux in practice with real a
 ### Development plans:
 
 1. Use react-router for make single user pages with details
-2. Use GraphQl instead of rest-api
