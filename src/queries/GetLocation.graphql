@@ -1,3 +1,0 @@
-query getLocation {
-  location @client
-}

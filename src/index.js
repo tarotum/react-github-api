@@ -8,14 +8,13 @@ import App from "./App";
 import "./index.css";
 
 const defaultState = {
-  location: "Odessa"
+  location: "Odessa",
+  key: ""
 };
 
 const client = new ApolloCliet({
   uri: "https://api.github.com/graphql",
-  headers: {
-    authorization: "Bearer personal_key_here"
-  },
+
   clientState: {
     defaults: defaultState,
     resolvers: {}
